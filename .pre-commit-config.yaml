@@ -1,0 +1,23 @@
+repos:
+  - repo: local
+    hooks:
+      - id: format-python
+        name: format-python
+        language: system
+        pass_filenames: false
+        entry: uv run ruff format
+      - id: reorder-python-imports
+        name: reorder-python-imports
+        language: system
+        entry: uv run reorder-python-imports --py312-plus --application-directories src:tests
+      - id: lint-python
+        name: lint-python
+        language: system
+        pass_filenames: false
+        entry: uv run ruff check --fix --show-fixes
+      - id: test-python
+        name: test-python
+        language: system
+        pass_filenames: false
+        entry: uv run pytest
+
