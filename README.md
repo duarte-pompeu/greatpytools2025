@@ -2,7 +2,7 @@ Repo with references for the talk: How to setup great python projects (2025 upda
 
 Includes:
 - cheatsheet (bottom of README)
-- script to run all checks: [checks.sh](./scripts/setup.sh)
+- script to run all checks: [checks.sh](./scripts/checks.sh)
 - script to setup a minimal project with these tools: [setup.sh](./scripts/setup.sh)
 
 Note: I'm not including the lock file in this repo because it can get stale, but it's usually a good idea to also version control it (except if you're working in a re-usable lib, where you may want users to have flexibility in versioning).
