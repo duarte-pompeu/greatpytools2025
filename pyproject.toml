@@ -16,22 +16,18 @@ include = ["src/**.py", "tests/**.py"]
 exclude= ["src/before.py"]
 
 lint.select = [
-  "B",    # bugbear:    potential bugs ( reports 'useless-expression' required by airflow )
+  "B",    # bugbear:    potential bugs
   "DTZ",  # datetimez:  warn about missing timezones
   "F",    # pyflakes:   potential errors
   "FURB", # refurb:     refurbishing and modernizing Python codebases
   "PERF", # perflint:   avoid performance anti-patterns
-  "PL",   # pylint:     the oldest static code analyser ( sometimes anoying, but not for now )
+  "PL",   # pylint:     the oldest static code analyser ( sometimes a bit pedantic)
   "RUF",  # ruff:       rules introduced by ruff
-  "S",    # bandit:     security issues                ( 92 sql injections + false positives for asserts )
-  "SIM",  # simplify:   helps you simplify your code   ( 1 warning)
+  "S",    # bandit:     security issues
+  "SIM",  # simplify:   helps you simplify your code
   "UP",   # pyupgrade:  upgrade syntax or newer versions of the language
 ]
-lint.ignore = [
-  # "B018",    # Found useless expression: required by airflow for dag generation
-  # "PERF401", # Use a list comprehension to create a transformed list: hurts readability, often in non-critical paths which don't need performance
-  # "PLR0915", # Too many statements (52 > 50)
-]
+lint.ignore = []
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
