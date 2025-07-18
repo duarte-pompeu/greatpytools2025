@@ -4,11 +4,34 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = ["requests>=2.32.3"]
+dependencies = []
 
 [dependency-groups]
 dev = ["pytest>=8.4.1", "reorder-python-imports>=3.15.0", "ruff>=0.12.3"]
 
+[tool.ruff]
+target-version="py313"
+
+include = ["src/**.py", "tests/**.py"]
+exclude= ["src/before.py"]
+
+lint.select = [
+  "B",    # bugbear:    potential bugs ( reports 'useless-expression' required by airflow )
+  "DTZ",  # datetimez:  warn about missing timezones
+  "F",    # pyflakes:   potential errors
+  "FURB", # refurb:     refurbishing and modernizing Python codebases
+  "PERF", # perflint:   avoid performance anti-patterns
+  "PL",   # pylint:     the oldest static code analyser ( sometimes anoying, but not for now )
+  "RUF",  # ruff:       rules introduced by ruff
+  "S",    # bandit:     security issues                ( 92 sql injections + false positives for asserts )
+  "SIM",  # simplify:   helps you simplify your code   ( 1 warning)
+  "UP",   # pyupgrade:  upgrade syntax or newer versions of the language
+]
+lint.ignore = [
+  # "B018",    # Found useless expression: required by airflow for dag generation
+  # "PERF401", # Use a list comprehension to create a transformed list: hurts readability, often in non-critical paths which don't need performance
+  # "PLR0915", # Too many statements (52 > 50)
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

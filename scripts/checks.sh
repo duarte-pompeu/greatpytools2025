@@ -1,8 +1,17 @@
 #/bin/bash
 
+# install/sync versions based on current pyproject.toml and uv.lock
 uv sync
-# ruff and pytest will apply configs in pyproject.toml automatically
+
+# formatting
+# ruff will apply configs from pyproject.toml automatically
 uv run ruff format
+uv run reorder-python-imports --py312-plus --application-directories src:tests
+
+# linting
+# ruff will apply configs from pyproject.toml automatically
 uv run ruff check --fix --show-fixes
-uv run reorder-python-imports --py312-plus --application-directories=src:tests
+
+# testing
+# pytest will apply configs from pyproject.toml automatically
 uv run pytest -vv

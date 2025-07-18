@@ -5,7 +5,7 @@ Includes:
 - script to run all checks: [checks.sh](./scripts/setup.sh)
 - script to setup a minimal project with these tools: [setup.sh](./scripts/setup.sh)
 
-I'm not including the lock file because it can get stale, but it's usually a good idea to also version control it.
+Note: I'm not including the lock file in this repo because it can get stale, but it's usually a good idea to also version control it (except if you're working in a re-usable lib, where you may want users to have flexibility in versioning).
 
 # Checks
 
@@ -13,6 +13,15 @@ Save them in a script, allowing your devs and CI/CD to run them consistently:
 
 ```shell
 bash scripts/checks.sh
+```
+
+We can also use `pre-commit` instead of shell scripts. With pre-commit, I recommend that you use `language: system` and let `uv` manage your versioning and `pyproject.toml` your configs; otherwise, you'll duplicate your effort and risk drift in configs and versions. Then you can:
+
+```shell
+# run manually
+uv tool run pre-commit run -a
+# install as as a git hook (applies automatically when committing)
+uv tool run pre-commit install
 ```
 
 If you want to tweak them, always prefer setting flags in `project.toml` than in the script, which has a few advantages:
@@ -35,6 +44,9 @@ uv init --python 3.13
 # install packages (usually automatic)
 uv sync
 
+# run your programs
+uv run python src/main.py
+
 # add packages
 uv add requests
 uv add pytest --dev
@@ -44,8 +56,8 @@ uv add pytest --dev
 # update packages (and their sub-dependencies)
 uv add requests --upgrade
 
-# run your programs
-uv run python src/main.py
+# remove packages
+uv remove requests
 
 # lock packages (usually automatic)
 uv lock
@@ -67,7 +79,7 @@ uv run ruff check --fix --show-fixes
 ## reorder-python-imports
 
 ```shell
-uv run reorder-python-imports --py312-plus --application-directories=src:tests
+uv run reorder-python-imports --py312-plus --application-directories src:tests
 ```
 
 ## pytest
