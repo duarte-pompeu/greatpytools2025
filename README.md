@@ -19,9 +19,9 @@ We can also use `pre-commit` instead of shell scripts. With pre-commit, I recomm
 
 ```shell
 # run manually
-uv tool run pre-commit run -a
+uvx pre-commit run -a
 # install as as a git hook (applies automatically when committing)
-uv tool run pre-commit install
+uvx pre-commit install
 ```
 
 If you want to tweak them, always prefer setting flags in `project.toml` than in the script, which has a few advantages:
@@ -45,7 +45,7 @@ uv init --python 3.13
 uv sync
 
 # run your programs
-uv run python src/main.py
+uv run python hello.py
 
 # add packages
 uv add requests
@@ -77,6 +77,8 @@ uv run ruff check --fix --show-fixes
 ```
 
 ## reorder-python-imports
+
+TODO: define files in pyproject.toml!
 
 ```shell
 uv run reorder-python-imports --py312-plus --application-directories src:tests
