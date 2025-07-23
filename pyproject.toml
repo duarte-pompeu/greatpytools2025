@@ -13,7 +13,7 @@ dev = ["pytest>=8.4.1", "reorder-python-imports>=3.15.0", "ruff>=0.12.3"]
 target-version="py313"
 
 include = ["src/**.py", "tests/**.py"]
-exclude= ["src/before.py"]
+exclude= ["src/before.py", "src/with_formatting_only.py"]
 
 lint.select = [
   "B",    # bugbear:    potential bugs

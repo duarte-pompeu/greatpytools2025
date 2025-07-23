@@ -1,6 +1,7 @@
 from typing import List
 import math
-from random import seed, sample
+from random import seed
+from random import sample
 import statistics
 
 
