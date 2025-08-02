@@ -1,0 +1,13 @@
+
+Found 9 errors.
+
+src\with_formatting_only.py:1:1: UP035 `typing.List` is deprecated, use `list` instead
+src\with_formatting_only.py:2:8: F401 [*] `math` imported but unused
+src\with_formatting_only.py:4:8: F401 [*] `statistics` imported but unused
+src\with_formatting_only.py:7:1: F403 `from itertools import *` used; unable to detect undefined names
+src\with_formatting_only.py:8:1: F403 `from random import *` used; unable to detect undefined names
+src\with_formatting_only.py:12:11: UP006 [*] Use `list` instead of `List` for type annotation
+src\with_formatting_only.py:12:23: B006 Do not use mutable data structures for argument defaults
+src\with_formatting_only.py:16:6: UP006 [*] Use `list` instead of `List` for type annotation
+src\with_formatting_only.py:22:11: F541 [*] f-string without any placeholders
+[*] 5 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).
