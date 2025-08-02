@@ -20,8 +20,8 @@ And I centralize all these configurations in `pyproject.toml`. This is very impo
 
 I'm also sharing other resources you may find useful:
 - [slides](https://docs.google.com/presentation/d/1hS-bk3oHlplpQmQMP0biF3PKijS8rZ39_I8thtyTbvg/edit?usp=sharing)
-- stream recording
-- VOD
+- [stream recording](https://www.youtube.com/watch?v=gJf-SpCAN9w&t=8469s) (unfortunately, has some audio issues)
+- VOD (soon?)
 - [repo with example](https://github.com//duarte-pompeu/greatpytools2025)
 
 # Tools
