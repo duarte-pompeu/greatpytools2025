@@ -1,4 +1,5 @@
 #/bin/bash
+set -e
 
 # install/sync versions based on current pyproject.toml and uv.lock
 uv sync

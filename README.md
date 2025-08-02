@@ -1,21 +1,36 @@
-Repo with references for the talk: How to setup great python projects (2025 update).
+Reference code for the talk: How to setup great python projects (2025 update), by Duarte Pompeu. You may also be interested in the [slides](https://docs.google.com/presentation/d/1hS-bk3oHlplpQmQMP0biF3PKijS8rZ39_I8thtyTbvg/edit?usp=drivesdk) and [stream](https://youtu.be/gJf-SpCAN9w?t=8469) (unfortunately it has audio issues). VOD soon, maybe improvable by LLM? 
 
 Includes:
 - cheatsheet (bottom of README)
-- script to run all checks: [checks.sh](./scripts/checks.sh)
 - script to setup a minimal project with these tools: [setup.sh](./scripts/setup.sh)
+- script to run all checks: [checks.sh](./scripts/checks.sh)
 
 Note: I'm not including the lock file in this repo because it can get stale, but it's usually a good idea to also version control it (except if you're working in a re-usable lib, where you may want users to have flexibility in versioning).
 
+# Configuration
+
+I always recommend that you configure these tools in `pyproject.toml`. Tools will look into it by default, and this has nice advantages:
+- reduces config drift
+- running from the CLI is really simple, eg `uv run ruff check` will automatically apply all the rules
+
+What usually happens when you don't centralize the configs:
+- extra effort: need to specify configs in scripts, IDE, CI/CD, always type them when running in CLI
+- config drif: if you want to change any configuration, and you forget to change it everywhere, it leads to drift and annoyances, eg CI/CD enforcing different rules than your local checks
+
 # Checks
 
-Save them in a script, allowing your devs and CI/CD to run them consistently:
+## Script
+
+If you want to keep it simple, you can store the commands in a script, that can be used by devs and CI/CD.
 
 ```shell
 bash scripts/checks.sh
 ```
 
-We can also use `pre-commit` instead of shell scripts. With pre-commit, I recommend that you use `language: system` and let `uv` manage your versioning and `pyproject.toml` your configs; otherwise, you'll duplicate your effort and risk drift in configs and versions. Then you can:
+## Pre-commit
+
+You can also use `pre-commit` instead of shell scripts.
+With pre-commit, I recommend that you always use `language: system` and let `uv` manage your tools, reducing duplicate efforts and configuration drifs.
 
 ```shell
 # run manually
@@ -23,11 +38,6 @@ uvx pre-commit run -a
 # install as as a git hook (applies automatically when committing)
 uvx pre-commit install
 ```
-
-If you want to tweak them, always prefer setting flags in `project.toml` than in the script, which has a few advantages:
-- script is simpler
-- running manually is simpler
-- other tools, such as IDEs, will also find these flags, eg when formatting
 
 # Cheatsheet
 
