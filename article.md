@@ -1,3 +1,5 @@
+How to setup great python projects (2025 update)
+---
 
 In 2023, I presented *Tools to setup great python projects* in PyCon Portugal, where I talked about the tools I used to setup my python projects, and how I configured them under a centralized setup. 2 years later, my philosophy hasn't changed a lot, but I'm using new tools which have significant advantages - at least significant enough to ~go to Carcavelos and catch some sun~ give a talk about it. This article explains the same topics, in written form.
 
