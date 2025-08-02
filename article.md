@@ -4,7 +4,7 @@ How to setup great python projects (2025 update)
 <img width="1035" height="582" alt="front" src="https://github.com/user-attachments/assets/803dcf32-1892-4422-94cc-942fe47009c4" />
 
 
-In 2023, I presented *Tools to setup great python projects* in PyCon Portugal, where I talked about the tools I used to setup my python projects, and how I configured them under a centralized setup. 2 years later, my philosophy hasn't changed a lot, but I'm using new tools which have significant advantages - at least significant enough to ~go to Carcavelos and catch some sun~ give a talk about it. This article explains the same topics, in written form.
+In 2023, I presented *Tools to setup great python projects* in PyCon Portugal, where I spoke about my favorite tools and how to configure them. 2 years later, my philosophy hasn't changed a lot, but I'm using new tools which have significant advantages - at least significant enough to ~go to Carcavelos and catch some sun~ give a talk about it. This article explains the same topics, in written form.
 
 For package management, I am now using `uv`. It makes it easy to manage your dependencies, and locks their versions (and their sub-dependencies) in a file, leading to very reliable deployments. It's also very fast and includes other goodies.
 
@@ -67,13 +67,13 @@ So far, I'm happy with uv, which also has a few other goodies:
 ![aligning_kittens](https://github.com/user-attachments/assets/685ef030-22b6-49d2-bcb6-2d38c9f9aac9)
 
 
-I love `black`'s slogan, inspired by Henry Ford: *any color you want, as long as it's black*. I really appreciated its (mostly) uncompromising philosophy: formats into a reasonable layout, that can be enforced consistently. Importantly: it's easy to setup setup and has good defaults.
+I love `black`'s slogan, inspired by Henry Ford: *any color you want, as long as it's black*. I really appreciated its (mostly) uncompromising philosophy: formats into a reasonable layout, that can be enforced consistently. Also important: it's easy to setup and has good defaults.
 
-The **consistency** is key for me: no longer different IDEs or devs formatting code differently and causing messy diffs: just configure a formatter, enforce it and enjoy this issue going away!
+More than the formatting, its **consistency** is key for me: no longer having IDEs or devs formatting code differently and causing messy diffs: just configure a formatter, enforce it and enjoy this issue going away!
 
-With this being said, I was using `ruff` as a linter and it gained the capability to also format, with a very similar results (inspired by `black`, actualy), so I made the switch and simplified my setup. It's also faster, so I'll take that as a win.
+With this being said, I was using `ruff` as a linter and it gained the capability to also format, with very similar results (inspired by `black`, actualy), so I made the switch and simplified my setup. It's also faster, so I'll take that as a win.
 
-A bit more niche, but I also replaced `isort` with `reorder-python-imports`. `isort` also has a nice slogan: *isort so you don't have to*; it behaved reasonably well, but I was introduced to `reorder-python-imports` with the following premise: 1 import per line leads to fewer git conflicts. I was skeptic and found it weird, but I gave it a try - and it does indeed reduce the amount of conflicts related to imports! So I'm being pragmatic and embracing it, along with  `ruff` (4).
+A bit more niche, but I also replaced `isort` with `reorder-python-imports`. `isort` also has a nice slogan: *isort so you don't have to*; it behaved reasonably well, but I was introduced to `reorder-python-imports` with the following premise: 1 import per line leads to fewer git conflicts. I was skeptical at first, but gave it a try and I'm convinced - it does indeed reduce the amount of conflicts related to imports! So I'm being pragmatic and embracing it, along with  `ruff` (4).
 
 Results:
 - reasonable layout
@@ -377,20 +377,20 @@ This is not a solution to all software engineering problems, not even close - bu
 
 # Audience questions
 
-Relevant questions from the audience and my answers, with extra context after reflecting them on a bit.
+Relevant questions from the audience and my answers, with extra context after reflecting on them for a bit.
 
 **What do you think about pre-commit?**
 
 I think it's a reliable way to configure all your tests, and even allow different workflows:
-- users can run it manually
-- users can install it in their git hooks
+- can be ran manually
+- can be installed with git hooks
 - CI/CD can also run it manually to perform the same checks
 
 However, I oppose the use of custom pre-commit hooks, such as [ruff-pre-commit](https://github.com/astral-sh/ruff-pre-commit). They will use different versions (maybe configurations?), which can introduce versioning/configuration drift, degrading developer experience. 
 
 My approach is to keep it simple and define `system` hooks, which just fires commands in your CLI, eg  `uv run ruff format`. This plays perfectly into the **centralized configuration** approach:
 - uses the same version as defined by`uv` (in `uv.lock`)
-- uses the same configurations as defined in `pyproject.toml
+- uses the same configurations as defined in `pyproject.toml`
 
 **What about documentation?**
 
