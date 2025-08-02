@@ -8,7 +8,7 @@ In 2023, I presented *Tools to setup great python projects* in PyCon Portugal, w
 
 For package management, I am now using `uv`. It makes it easy to manage your dependencies, and locks their versions (and their sub-dependencies) in a file, leading to very reliable deployments. It's also very fast and includes other goodies.
 
-For formatting, I switched to `ruff` + `reorder-python-imports`. The former is nice because it's fast and also lints, with reasonable defaults. The later is more niche, but enforces *one import per line*, which can decrease conflicts in `git`.
+For formatting, I switched to `ruff` + `reorder-python-imports`. The former is nice because it's fast and also lints, with reasonable defaults. The latter is more niche, but enforces *one import per line*, which can decrease conflicts in `git`.
 
 For code linting, I'm staying with `ruff`. It supports hundreds of rules and allows for safe (and unsafe!) auto-fixes.
 
