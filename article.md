@@ -436,6 +436,33 @@ My approach is to keep it simple and define `system` hooks, which just fires com
 - uses the same version as defined by`uv` (in `uv.lock`)
 - uses the same configurations as defined in `pyproject.toml`
 
+Here's a simple example:
+
+```yaml
+repos:
+  - repo: local
+    hooks:
+      - id: format-python
+        name: format-python
+        language: system
+        pass_filenames: false
+        entry: uv run ruff format
+      - id: reorder-python-imports
+        name: reorder-python-imports
+        language: system
+        entry: uv run reorder-python-imports --py312-plus --application-directories src:tests
+      - id: lint-python
+        name: lint-python
+        language: system
+        pass_filenames: false
+        entry: uv run ruff check --fix --show-fixes
+      - id: test-python
+        name: test-python
+        language: system
+        pass_filenames: false
+        entry: uv run pytest
+```
+
 **What about documentation?**
 
 Currently not using any tools for that. I think it's more useful for libraries, where many users are interacting with the interfaces without reading the internals, while I'm mostly developing applications, in small teams who are familiar with the code (and can read the docstrings from their IDE).
