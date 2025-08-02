@@ -1,6 +1,9 @@
 How to setup great python projects (2025 update)
 ---
 
+<img width="1035" height="582" alt="front" src="https://github.com/user-attachments/assets/803dcf32-1892-4422-94cc-942fe47009c4" />
+
+
 In 2023, I presented *Tools to setup great python projects* in PyCon Portugal, where I talked about the tools I used to setup my python projects, and how I configured them under a centralized setup. 2 years later, my philosophy hasn't changed a lot, but I'm using new tools which have significant advantages - at least significant enough to ~go to Carcavelos and catch some sun~ give a talk about it. This article explains the same topics, in written form.
 
 For package management, I am now using `uv`. It makes it easy to manage your dependencies, and locks their versions (and their sub-dependencies) in a file, leading to very reliable deployments. It's also very fast and includes other goodies.
@@ -24,6 +27,9 @@ I'm also sharing other resources you may find useful:
 # Tools
 
 ## Package manager
+
+![packages](https://github.com/user-attachments/assets/19ddaab0-128e-49b8-9249-bf919e6f6475)
+
 
 The two main things I look for in a package manager are:
 - **an easy way to manage dependencies**
@@ -57,6 +63,9 @@ So far, I'm happy with uv, which also has a few other goodies:
 - pipx: install python tools not pinned to projects, eg `pre-commit` or `poetry`
 
 ## Formatting
+
+![aligning_kittens](https://github.com/user-attachments/assets/685ef030-22b6-49d2-bcb6-2d38c9f9aac9)
+
 
 I love `black`'s slogan, inspired by Henry Ford: *any color you want, as long as it's black*. I really appreciated its (mostly) uncompromising philosophy: formats into a reasonable layout, that can be enforced consistently. Importantly: it's easy to setup setup and has good defaults.
 
@@ -141,6 +150,9 @@ if __name__ == "__main__":
 ```
 
 ## Linting
+
+![explain](https://github.com/user-attachments/assets/5e1406e7-a66f-4552-bde3-efdf7df89ed8)
+
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Lint_(software)), a linter is a "static code analysis tool used to flag programming errors, bugs, stylistic errors and suspicious constructs". You can get more complex checks with LLMs or online services, but I prefer to use simple local tools. (5)
 
@@ -237,6 +249,9 @@ if __name__ == "__main__":
 
 ## Tests
 
+![explain](https://github.com/user-attachments/assets/69b26bc5-2f61-4485-926c-f626eae37c28)
+
+
 `pytest` is almost like `requests`: the standard lib has similar tools included, but these are much nicer to use. 
 
 I'm also curious about `hypothesis`, but use it rarely. I'm a fan of the oracle pattern: if you need to refactor function `f`, keep it and introduce `f_new`. Why the extra step and not just replace? Well, `f` will be an *oracle*, showing what's the correct output for a given input (if it was well coded!), so you can compare `f_new` against it. If both functions always return the same outputs, it's likely the refactor is correct (or more precisely, unlikely the refactor is incorrect)! (7)
@@ -315,6 +330,9 @@ def test_child_b(child_b):
 
 # Centralized configurations
 
+![centralized](https://github.com/user-attachments/assets/02191739-86b4-41b5-ae93-33890e1985a0)
+
+
 With so many tools, it's important to make them a breeze to configure and use across many systems: scripts, CLIs, IDEs, CI/CDs, and so on. If you work in a team, this means these tools will affect you and all your colleagues too! There's two possible outcomes:
 - do it well: everyone will have a smooth experience and appreciate the setup
 - do it wrong: inconsistencies and errors will make it more painful than helpful
@@ -323,6 +341,9 @@ So, my way to "do it well" is simple:
 1. configure everything in `pyproject.toml`
 2. optional: write a simple script to apply checks you want 
 3. enjoy the consistency across systems: CLIs, IDEs, scripts and CI/CDs
+
+<img width="1235" height="927" alt="centralized_dark excalidraw" src="https://github.com/user-attachments/assets/32fe3434-99e7-41a6-8ff8-9108a3994610" />
+
 
 How so?
 
