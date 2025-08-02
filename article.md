@@ -19,6 +19,7 @@ For tests, I'm keeping `pytest`. It's more ergonomic than the native `unittest` 
 And I centralize all these configurations in `pyproject.toml`. This is very important! This will guarantee that other systems interacting with them (scripts, CLIs, IDEs, CI/CDs) will always use the same configuration! This results in a pleasing developer experience: **flexible workflows, consistent results**.
 
 I'm also sharing other resources you may find useful:
+
 - [slides](https://docs.google.com/presentation/d/1hS-bk3oHlplpQmQMP0biF3PKijS8rZ39_I8thtyTbvg/edit?usp=sharing)
 - [stream recording](https://www.youtube.com/watch?v=gJf-SpCAN9w&t=8469s) (unfortunately, has some audio issues)
 - VOD (soon?)
@@ -28,14 +29,15 @@ I'm also sharing other resources you may find useful:
 
 ## Package manager
 
-![packages](https://github.com/user-attachments/assets/19ddaab0-128e-49b8-9249-bf919e6f6475)
+![](https://github.com/user-attachments/assets/19ddaab0-128e-49b8-9249-bf919e6f6475)
 
 
 The two main things I look for in a package manager are:
+
 - **an easy way to manage dependencies**
 - **a lock with all main and sub-dependencies** (1)
 
-Some recent languages, like go and rust, come with a good package manager. But Python is older and didn't start so great on this front, so it's been a rocky road for me:
+Some recent languages, like go and rust, already include a good package manager. But Python is older and didn't start with the right foot, so it's been a rocky road for me:
 
 - **pip**: easy to pull packages, but hard to manage versions across different projects (on its own)
 - **pip + venv + requirements.txt**: a bit of a hack to get the job done: works but devx (developer experience) isn't great (2)
@@ -44,8 +46,9 @@ Some recent languages, like go and rust, come with a good package manager. But P
 - **uv**: as reliable as above, but much faster and all in one
 
 So far, I'm happy with uv, which also has a few other goodies:
+
 - install packages directly from git (poetry and others are also able to)
-- easier to manage machine learning packages (heard pytorch is actually installable with `uv`)
+- easier to manage machine learning packages (heard it can actually manage `pytorch`)
 - can install packages in editable mode (useful for development, poetry and others are also able to)
 
 
@@ -64,18 +67,19 @@ So far, I'm happy with uv, which also has a few other goodies:
 
 ## Formatting
 
-![aligning_kittens](https://github.com/user-attachments/assets/685ef030-22b6-49d2-bcb6-2d38c9f9aac9)
+![](https://github.com/user-attachments/assets/685ef030-22b6-49d2-bcb6-2d38c9f9aac9)
 
 
 I love `black`'s slogan, inspired by Henry Ford: *any color you want, as long as it's black*. I really appreciated its (mostly) uncompromising philosophy: formats into a reasonable layout, that can be enforced consistently. Also important: it's easy to setup and has good defaults.
 
 More than the formatting, its **consistency** is key for me: no longer having IDEs or devs formatting code differently and causing messy diffs: just configure a formatter, enforce it and enjoy this issue going away!
 
-With this being said, I was using `ruff` as a linter and it gained the capability to also format, with very similar results (inspired by `black`, actualy), so I made the switch and simplified my setup. It's also faster, so I'll take that as a win.
+With this said, I switch to `ruff`: I was already using it to lint, and it gained the capability to also format, with very similar results (inspired by `black`, actualy), so I made the switch and simplified my setup. It's also faster, so I'll take that as a win.
 
 A bit more niche, but I also replaced `isort` with `reorder-python-imports`. `isort` also has a nice slogan: *isort so you don't have to*; it behaved reasonably well, but I was introduced to `reorder-python-imports` with the following premise: 1 import per line leads to fewer git conflicts. I was skeptical at first, but gave it a try and I'm convinced - it does indeed reduce the amount of conflicts related to imports! So I'm being pragmatic and embracing it, along with  `ruff` (4).
 
-Results:
+**Results**:
+
 - reasonable layout
 - consistent formatting
 - less time spent formatting manually (or discussing it in reviews)
@@ -84,7 +88,7 @@ Results:
 
 ## Example
 
-Before:
+Let's say you have an unformatted code of Python, with long statements and weird blank lines, such as this:
 
 ```python
 from typing import List
@@ -113,14 +117,14 @@ if __name__ == "__main__":
     print(pick_random_elements([2025, 7, 24, 16, 0], 10, True))
 ```
 
-Commands (assuming you have `src/` and `tests/`):
+To improve this, you can run the following commands (assuming you have `src/` and `tests/`):
 
 ```shell
 uv run ruff format
 uv run reorder-python-imports --py312-plus --application-directories src:tests
 ```
 
-Results:
+Leading to something like this:
 
 ```python
 from typing import List
@@ -151,14 +155,14 @@ if __name__ == "__main__":
 
 ## Linting
 
-![explain](https://github.com/user-attachments/assets/5e1406e7-a66f-4552-bde3-efdf7df89ed8)
-
+![](https://github.com/user-attachments/assets/5e1406e7-a66f-4552-bde3-efdf7df89ed8)
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Lint_(software)), a linter is a "static code analysis tool used to flag programming errors, bugs, stylistic errors and suspicious constructs". You can get more complex checks with LLMs or online services, but I prefer to use simple local tools. (5)
 
 In the past I used `flake8`, but `ruff` has implemented most of its rules (and more), so that's why I'm using it now.
 
-Results:
+**Results**:
+
 - avoid basic errors
 - learn more about Python
 - configure from hundreds of rules
@@ -170,7 +174,7 @@ Results:
 
 ## Example
 
-Before:
+Let's continue from the previously formatted file:
 
 ```python
 from typing import List
@@ -199,13 +203,13 @@ if __name__ == "__main__":
     print(pick_random_elements([2025, 7, 24, 16, 0], 10, True))
 ```
 
-With the commands:
+We can run these commands to check for basic problems:
 
 ```shell
 uv run ruff check --fix --show-fixes
 ```
 
-Detected the following issues:
+In this case (given my configuration, see details at end), it detected the following issues:
 
 ```
 Found 9 errors:
@@ -221,7 +225,7 @@ F541 [*] f-string without any placeholders
 [*] 5 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).
 ```
 
-After fixing (some automatically, others manually):
+After applying the fixes (either automatically or manually), we get the following:
 
 ```python
 from random import sample
@@ -249,14 +253,16 @@ if __name__ == "__main__":
 
 ## Tests
 
-![explain](https://github.com/user-attachments/assets/69b26bc5-2f61-4485-926c-f626eae37c28)
-
+![FIXME: wrong gif](https://github.com/user-attachments/assets/69b26bc5-2f61-4485-926c-f626eae37c28)
 
 `pytest` is almost like `requests`: the standard lib has similar tools included, but these are much nicer to use. 
 
-I'm also curious about `hypothesis`, but use it rarely. I'm a fan of the oracle pattern: if you need to refactor function `f`, keep it and introduce `f_new`. Why the extra step and not just replace? Well, `f` will be an *oracle*, showing what's the correct output for a given input (if it was well coded!), so you can compare `f_new` against it. If both functions always return the same outputs, it's likely the refactor is correct (or more precisely, unlikely the refactor is incorrect)! (7)
+My main interests on it are its ergonomy, and advanced features like parameters and fixtures. 
 
-Results:
+I'm also curious about `hypothesis`, but use it rarely. I'm a fan of the oracle pattern(7).
+
+**Results**:
+
 - ergonomic tests
 - it allows re-usable objects via *fixtures* (which are nicer than globals)
 - it allows for re-usable tests via *parameters* 
@@ -264,9 +270,11 @@ Results:
 
 (6) However, the final code it actually generates is a thing from nightmares, as shown by Pablo in PyCon Portugal 2025 :D
 
-(7) Here's a better explanation from Hillen Wayne: [Hypothesis Testing with Oracle Functions](https://www.hillelwayne.com/post/hypothesis-oracles/)
+(7) Here's an explanation from Hillen Wayne: [Hypothesis Testing with Oracle Functions](https://www.hillelwayne.com/post/hypothesis-oracles/)
 
 # Example
+
+I'll provide a few examples. Let's start with an easy, which takes 2 lines of code:
 
 ```python
 def test_f():
@@ -299,6 +307,7 @@ def test double(input, output)
 You can also assign custom names to each parameter (see pytest docs).
 
 Fixtures allow you to re-use complex objects without globals. You can also:
+
 - chain initialization of objects depending on others
 - define when to initialize them (default: per function; but allows per module, per session, etc.)
 
@@ -330,7 +339,7 @@ def test_child_b(child_b):
 
 # Centralized configurations
 
-![centralized](https://github.com/user-attachments/assets/02191739-86b4-41b5-ae93-33890e1985a0)
+![FIXME: wrong gif](https://github.com/user-attachments/assets/02191739-86b4-41b5-ae93-33890e1985a0)
 
 
 With so many tools, it's important to make them a breeze to configure and use across many systems: scripts, CLIs, IDEs, CI/CDs, and so on. If you work in a team, this means these tools will affect you and all your colleagues too! There's two possible outcomes:
@@ -338,35 +347,69 @@ With so many tools, it's important to make them a breeze to configure and use ac
 - do it wrong: inconsistencies and errors will make it more painful than helpful
 
 So, my way to "do it well" is simple:
-1. configure everything in `pyproject.toml`
-2. optional: write a simple script to apply checks you want 
-3. enjoy the consistency across systems: CLIs, IDEs, scripts and CI/CDs
 
-<img width="1235" height="927" alt="centralized_dark excalidraw" src="https://github.com/user-attachments/assets/32fe3434-99e7-41a6-8ff8-9108a3994610" />
+**1. Centralize the configurations in `pyproject.toml`**: by default, these tools will look into `pyproject.toml` for configurations. Configuring them there allows you to run these utilities easily, without any flag, but still have them work consistently with the expected rules
 
+**2. (Optional) Define a script with the checks you want**: this script calls the tools, to run locally and/or to be ran by CI/CD. This  way, everyone is on the same page: if the fix CI/CD complains about issues, you can run your script locally and fix them. **If it's fixed locally, it's fixed in CI/CD**.
 
-How so?
+**3. Enjoy the consistency across systems**: W hat's this consistency about? Let's consider an example with formatting :
 
-1: by default, these tools will look into `pyproject.toml` for configurations. Configuring them there allows you to run these utilities easily, without any flag, but still have them work consistently with the expected rules
-
-2: a script defines the checks that can be performed, and can be enforced by CI/CD. This  way, everyone is on the same page: if the fix CI/CD complains about issues, you can run your script locally and fix them. **If it's fixed locally, it's fixed in CI/CD**.
-
-3: what's this consistency about? Let's consider an example with formatting :
 - CLI: just run `ruff format`
 - IDE: just configure it to use `ruff format`
 - Script: just write the basic commands, eg `ruff format`
 - CI/CD: just run the script, or code the simple commands
 
-If you specified the rules in `pyproject.toml`, all the examples from above will behave exactly the same! This brings nice results:
+If you specified the rules in `pyproject.toml`, all the examples from above will behave exactly the same! This brings nice **Results**:
 - avoid different devs using different formatting
 - avoid CI/CD enforcing different formatting rules than devs expect
 - avoids drift in configurations (eg change in one place but not in another)
+
+<img width="1235" height="927" alt="centralized_dark excalidraw" src="https://github.com/user-attachments/assets/32fe3434-99e7-41a6-8ff8-9108a3994610" />
+
+FIXME: colors
+
+Heres a simple example with configurations:
+
+```toml
+[tool.ruff]
+target-version="py313"
+
+include = ["src/**.py", "tests/**.py"]
+exclude= ["src/before.py"]
+
+lint.select = [
+  "B",    # bugbear:    potential bugs
+  "DTZ",  # datetimez:  warn about missing timezones
+  "F",    # pyflakes:   potential errors
+  "FURB", # refurb:     refurbishing and modernizing Python codebases
+  "PERF", # perflint:   avoid performance anti-patterns
+  "PL",   # pylint:     the oldest static code analyser ( sometimes a bit pedantic)
+  "RUF",  # ruff:       rules introduced by ruff
+  "S",    # bandit:     security issues
+  "SIM",  # simplify:   helps you simplify your code
+  "UP",   # pyupgrade:  upgrade syntax or newer versions of the language
+]
+lint.ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+# Some checks don't make sense in unit tests
+"tests/*.py" = [
+    "S101",    # Use of `assert` detected
+    "PLR0133", # Two constants compared in a comparison, consider replacing `1 == 1"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["./tests"]
+```
+
 
 # Wrapping up
 
 In short, I'm using: `uv`, `ruff`, `reorder-python-imports` and `pytest` to setup my Python projects for a better experience. All configurations are centralized in `pyproject.toml` so they are easily re-usable across CLIs, IDEs, scripts and CI/CD.
 
-This provides a setup with:
+This delivers useful things:
+
 - reproducible deployments
 - consistent formatting
 - helpful static checks
@@ -382,6 +425,7 @@ Relevant questions from the audience and my answers, with extra context after re
 **What do you think about pre-commit?**
 
 I think it's a reliable way to configure all your tests, and even allow different workflows:
+
 - can be ran manually
 - can be installed with git hooks
 - CI/CD can also run it manually to perform the same checks
@@ -398,7 +442,8 @@ Currently not using any tools for that. I think it's more useful for libraries, 
 
 **What about type checking?**
 
-I find it useful to write type hints and check them occasionally, but I usually don't enforce it
+I find it useful to write type hints and check them occasionally, but I usually don't enforce it:
+
 - early in the project: experimental code, not caring about types
 - late in the project: too many errors to enforce
 
