@@ -300,7 +300,7 @@ import pytest
 		(100, 200)
 	]
 )
-def test double(input, output)
+def test_double(input, output)
 	assert input == output
 ```
 
