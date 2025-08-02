@@ -4,7 +4,7 @@ How to setup great python projects (2025 update)
 <img width="1035" height="582" alt="front" src="https://github.com/user-attachments/assets/803dcf32-1892-4422-94cc-942fe47009c4" />
 
 
-In 2023, I presented *Tools to setup great python projects* in PyCon Portugal, where I spoke about my favorite tools and how to configure them. 2 years later, my philosophy hasn't changed a lot, but I'm using new tools which have significant advantages - at least significant enough to ~go to Carcavelos and catch some sun~ give a talk about it. This article explains the same topics, in written form.
+In 2023, I presented *Tools to setup great python projects* in PyCon Portugal, where I spoke about my favorite tools and how to configure them. 2 years later, my philosophy hasn't changed a lot, but I'm using new tools which have significant advantages - at least enough to ~go to Carcavelos and catch some sun~ give a new talk about it. This article explains the same topics, in written form.
 
 For package management, I am now using `uv`. It makes it easy to manage your dependencies, and locks their versions (and their sub-dependencies) in a file, leading to very reliable deployments. It's also very fast and includes other goodies.
 
