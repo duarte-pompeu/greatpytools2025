@@ -3,20 +3,22 @@ How to setup great python projects (2025 update)
 
 <img width="1035" height="582" alt="front" src="https://github.com/user-attachments/assets/803dcf32-1892-4422-94cc-942fe47009c4" />
 
+A guide to using uv, ruff, reorder-python-imports and pytest to manage packages, formatting, static analysis and testing - all under a centralized configuration that is easy to re-use across CI/CDs, CLIs, IDEs and scripts.
 
-In 2023, I presented *Tools to setup great python projects* in PyCon Portugal, where I spoke about my favorite tools and how to configure them. 2 years later, my philosophy hasn't changed a lot, but I'm using new tools which have significant advantages - at least enough to ~go to Carcavelos and catch some sun~ give a new talk about it. This article explains the same topics, in written form.
+# Summary
 
-For package management, I am now using `uv`. It makes it easy to manage your dependencies, and locks their versions (and their sub-dependencies) in a file, leading to very reliable deployments. It's also very fast and includes other goodies.
 
-For formatting, I switched to `ruff` + `reorder-python-imports`. The former is nice because it's fast and also lints, with reasonable defaults. The latter is more niche, but enforces *one import per line*, which can decrease conflicts in `git`.
+In 2023, I presented *Tools to setup great Python projects* in PyCon Portugal, where I spoke about my favorite tools and how to configure them. 2 years later, my philosophy hasn't changed a lot, but I'm using new tools which have significant advantages - at least enough to give a new talk about it (and go to Carcavelos and catch some sun). This article explains the same topics, in written form.
 
-For code linting, I'm staying with `ruff`. It supports hundreds of rules and allows for safe (and unsafe!) auto-fixes.
+**Package management (uv)**: I am now using `uv`, which makes it easy to manage your dependencies, and locks their versions (and their sub-dependencies) in a file, leading to very reliable deployments. It's also very fast and includes other goodies.
 
-For tests, I'm keeping `pytest`. It's more ergonomic than the native `unittest` and includes extra goodies such as:
-- fixtures: re-usable objects (but better than global variables)
-- parameters: re-use test code for different inputs/outputs
+**Formatting (ruff + reorder-python-imports)**: I switched my tools for formatting; keeping the good defaults and consistency, but now with improved speed, and few git conflicts.
 
-And I centralize all these configurations in `pyproject.toml`. This is very important! This will guarantee that other systems interacting with them (scripts, CLIs, IDEs, CI/CDs) will always use the same configuration! This results in a pleasing developer experience: **flexible workflows, consistent results**.
+**Code linting (ruff)**: I'm staying with `ruff`, as it's fast, supports hundreds of rules and allows for safe auto-fixing.
+
+**Tests (pytest)**: I'm keeping `pytest`, as it's more ergonomic than the native `unittest` and includes fixtures, parametrized tests and other advanced features.
+
+**Centralized configuration (pyproject.toml)**: I centralize all these configurations in `pyproject.toml`. This is very important! This will guarantee that other systems interacting with them (scripts, CLIs, IDEs, CI/CDs) will always use the same configuration! This results in a pleasing developer experience: **flexible workflows, consistent results**.
 
 I'm also sharing other resources you may find useful:
 
@@ -72,7 +74,7 @@ So far, I'm happy with uv, which also has a few other goodies:
 
 I love `black`'s slogan, inspired by Henry Ford: *any color you want, as long as it's black*. I really appreciated its (mostly) uncompromising philosophy: formats into a reasonable layout, that can be enforced consistently. Also important: it's easy to setup and has good defaults.
 
-More than the formatting, its **consistency** is key for me: no longer having IDEs or devs formatting code differently and causing messy diffs: just configure a formatter, enforce it and enjoy this issue going away!
+More than the formatting, its **consistency** is key for me: having IDEs or devs formatting code differently causes messy diffs and file history! It's much better to agree on a formatting style and enforce it, and watch the problem disappear.
 
 With this said, I switch to `ruff`: I was already using it to lint, and it gained the capability to also format, with very similar results (inspired by `black`, actualy), so I made the switch and simplified my setup. It's also faster, so I'll take that as a win.
 
@@ -270,7 +272,7 @@ I'm also curious about `hypothesis`, but use it rarely. I'm a fan of the oracle 
 
 (6) However, the final code it actually generates is a thing from nightmares, as shown by Pablo in PyCon Portugal 2025 :D
 
-(7) Here's an explanation from Hillen Wayne: [Hypothesis Testing with Oracle Functions](https://www.hillelwayne.com/post/hypothesis-oracles/)
+(7) Here's an explanation from Hillel Wayne: [Hypothesis Testing with Oracle Functions](https://www.hillelwayne.com/post/hypothesis-oracles/)
 
 # Example
 
@@ -297,7 +299,7 @@ import pytest
 		(0, 0),
 		(0.0001, 0.0002),
 		(1, 2),
-		(100, 200)
+		(100, 200),
 	]
 )
 def test_double(input, output)
@@ -364,11 +366,13 @@ If you specified the rules in `pyproject.toml`, all the examples from above will
 - avoid CI/CD enforcing different formatting rules than devs expect
 - avoids drift in configurations (eg change in one place but not in another)
 
+This looks something like this:
+
 <img width="1235" height="927" alt="centralized_dark excalidraw" src="https://github.com/user-attachments/assets/32fe3434-99e7-41a6-8ff8-9108a3994610" />
 
 FIXME: colors
 
-Heres a simple example with configurations:
+Here's a simple example with configurations:
 
 ```toml
 [tool.ruff]
@@ -477,3 +481,13 @@ I find it useful to write type hints and check them occasionally, but I usually 
 But I'm curious about some new type checkers such as `ty` and `pyrefly`.
 
 (I'm cheating, I put that question myself in advance due to a question from 2023 :p)
+
+## Thanks!
+
+Thanks to everyone who helped me develop this article:
+
+- feedzai: the company where I'm working, for sponsoring the travel for the conference
+- José Raposo & Leonardo Marques: for reviewing the article
+- PyCon Portugal: for having me!
+- Rafaela Nogueira: for helping me style the slides and designing the front cover
+- Taian Feitosa: for introducing me to `reorder-python-imports`
