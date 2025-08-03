@@ -3,9 +3,9 @@ How to setup great python projects (2025 update)
 
 Reference code for the talk: How to setup great python projects (2025 update), by Duarte Pompeu. You may also be interested in:
 
-- [slides](https://docs.google.com/presentation/d/1hS-bk3oHlplpQmQMP0biF3PKijS8rZ39_I8thtyTbvg/edit?usp=drivesdk)
+- [slides](https://docs.google.com/presentation/d/1hS-bk3oHlplpQmQMP0biF3PKijS8rZ39_I8thtyTbvg/edit?usp=drivesdk) used in the talk
 - [stream](https://youtu.be/gJf-SpCAN9w?t=8469) (unfortunately it has audio issues)
-- [article](./article.md)
+- [article](./article.md): the written version of the talk 
 - VOD: soon?
 
 Includes:
