@@ -1,12 +1,18 @@
 How to setup great python projects (2025 update)
 ---
 
-Reference code for the talk: How to setup great python projects (2025 update), by Duarte Pompeu. You may also be interested in the [slides](https://docs.google.com/presentation/d/1hS-bk3oHlplpQmQMP0biF3PKijS8rZ39_I8thtyTbvg/edit?usp=drivesdk) and [stream](https://youtu.be/gJf-SpCAN9w?t=8469) (unfortunately it has audio issues). VOD soon, maybe improvable by LLM? 
+Reference code for the talk: How to setup great python projects (2025 update), by Duarte Pompeu. You may also be interested in:
+
+- [slides](https://docs.google.com/presentation/d/1hS-bk3oHlplpQmQMP0biF3PKijS8rZ39_I8thtyTbvg/edit?usp=drivesdk)
+- [stream](https://youtu.be/gJf-SpCAN9w?t=8469) (unfortunately it has audio issues)
+- [article](./article.md)
+- VOD: soon?
 
 Includes:
 - cheatsheet (bottom of README)
 - script to setup a minimal project with these tools: [setup.sh](./scripts/setup.sh)
 - script to run all checks: [checks.sh](./scripts/checks.sh)
+
 
 Note: I'm not including the lock file in this repo because it can get stale, but it's usually a good idea to also version control it (except if you're working in a re-usable lib, where you may want users to have flexibility in versioning).
 
