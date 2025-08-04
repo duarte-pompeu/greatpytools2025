@@ -1,4 +1,4 @@
-How to setup great python projects (2025 update)
+Tools to setup great python projects (2025 update)
 ---
 
 <img width="1035" height="582" alt="front" src="https://github.com/user-attachments/assets/803dcf32-1892-4422-94cc-942fe47009c4" />
